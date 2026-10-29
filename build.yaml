@@ -1,0 +1,16 @@
+targets:
+  $default:
+    sources:
+      - lib/**
+    builders:
+      json_serializable:
+        generate_for:
+          - lib/core/networking/api_error_model.dart
+          - lib/features/**/*.dart
+      freezed:
+        generate_for:
+          - lib/core/networking/api_result.dart
+          - lib/features/**/*.dart
+      retrofit_generator:
+        generate_for:
+          - lib/core/networking/api_service.dart
