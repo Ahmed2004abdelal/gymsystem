@@ -10,25 +10,85 @@ import 'package:gymsystem/core/theme/app_colors.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:window_manager/window_manager.dart';
 
+import 'dart:async';
+import 'dart:io';
+
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await checkIfLoggedInUser();
+//   await setupGetIt();
+//   tzdata.initializeTimeZones();
+
+//   await windowManager.waitUntilReadyToShow(
+//     const WindowOptions(
+//       size: Size(1440, 900),
+//       minimumSize: Size(1100, 700),
+//       center: true,
+//     ),
+//     () async {
+//       await windowManager.show();
+//       await windowManager.focus();
+//     },
+//   );
+
+//   runApp(const MyApp());
+// }
+
+void _log(String msg) {
+  try {
+    final base =
+        Platform.environment['LOCALAPPDATA'] ?? Directory.systemTemp.path;
+    File('$base\\bootcamp_log.txt')
+        .writeAsStringSync('${DateTime.now()} $msg\n', mode: FileMode.append);
+  } catch (_) {}
+}
+
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await checkIfLoggedInUser();
-  await setupGetIt();
-  tzdata.initializeTimeZones();
+  await runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    FlutterError.onError = (d) =>
+        _log('FlutterError: ${d.exception}\n${d.stack}');
 
-  await windowManager.waitUntilReadyToShow(
-    const WindowOptions(
-      size: Size(1440, 900),
-      minimumSize: Size(1100, 700),
-      center: true,
-    ),
-    () async {
-      await windowManager.show();
-      await windowManager.focus();
-    },
-  );
+    try {
+      _log('1 checkIfLoggedInUser');
+      await checkIfLoggedInUser();
 
-  runApp(const MyApp());
+      _log('2 setupGetIt');
+      await setupGetIt();
+
+      _log('3 timezones');
+      tzdata.initializeTimeZones();
+
+      _log('4 window');
+      await windowManager.ensureInitialized();
+      await windowManager.waitUntilReadyToShow(
+        const WindowOptions(
+          size: Size(1440, 900),
+          minimumSize: Size(1100, 700),
+          center: true,
+        ),
+        () async {
+          await windowManager.show();
+          await windowManager.focus();
+        },
+      );
+
+      _log('5 runApp');
+      runApp(const MyApp());
+    } catch (e, s) {
+      _log('STARTUP ERROR: $e\n$s');
+      runApp(
+        MaterialApp(
+          home: Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.all(24),
+              child: SelectableText('Startup error:\n$e\n\n$s'),
+            ),
+          ),
+        ),
+      );
+    }
+  }, (e, s) => _log('UNCAUGHT: $e\n$s'));
 }
 
 class MyApp extends StatelessWidget {
