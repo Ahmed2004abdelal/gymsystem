@@ -32,4 +32,8 @@ jobs:
 
       - uses: softprops/action-gh-release@v2
         with:
+          repository: Ahmed2004abdelal/gymsystem-releases
+          token: ${{ secrets.RELEASES_TOKEN }}
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
           files: Output/BootCamp-Setup-*.exe
