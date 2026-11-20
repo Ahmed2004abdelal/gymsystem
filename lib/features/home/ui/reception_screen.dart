@@ -31,6 +31,7 @@ class ReceptionScreen extends StatelessWidget {
     final mainColumn = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SessionCheckBlockListener(),
         const _TopInfo(),
         verticalSpace(16),
         const ScannerCard(),
@@ -91,9 +92,9 @@ class ReceptionScreen extends StatelessWidget {
 class _TopInfo extends StatelessWidget {
   const _TopInfo();
 
-  void refreshLiveAttendance(BuildContext context) {
-    context.read<ReceptionCubit>().liveAttendance();
-  }
+  // void refreshLiveAttendance(BuildContext context) {
+  //   context.read<ReceptionCubit>().liveAttendance();
+  // }
 
   // جوه _TopInfo
   void _onSingleSession(BuildContext context) {
@@ -107,43 +108,48 @@ class _TopInfo extends StatelessWidget {
       runSpacing: 12,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const CircleAvatar(backgroundColor: AppColors.primary, radius: 5),
-              horizontalSpace(8),
-              GestureDetector(
-                onTap: () => refreshLiveAttendance(context),
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'داخل الصالة الآن',
-                        style: AppTextStyle.bodyMedium,
-                      ),
-                      TextSpan(
-                        text:
-                            '  ${context.watch<ReceptionCubit>().state.liveAttendanceData?.length ?? 0} عضو',
-                        style: AppTextStyle.titleMedium.copyWith(
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SessionCheckBlockListener(),
-            ],
-          ),
-        ),
+        // Container(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        //   decoration: BoxDecoration(
+        //     color: AppColors.surfaceVariant,
+        //     borderRadius: BorderRadius.circular(100),
+        //   ),
+        //   child: Row(
+        //     mainAxisSize: MainAxisSize.min,
+        //     children: [
+        //       const CircleAvatar(backgroundColor: AppColors.primary, radius: 5),
+        //       horizontalSpace(8),
+        // GestureDetector(
+        //   onTap: () => refreshLiveAttendance(context),
+        //   child: Text.rich(
+        //     TextSpan(
+        //       children: [
+        //         TextSpan(
+        //           text: 'داخل الصالة الآن',
+        //           style: AppTextStyle.bodyMedium,
+        //         ),
+        //         TextSpan(
+        //           text:
+        //               '  ${context.watch<ReceptionCubit>().state.liveAttendanceData?.length ?? 0} عضو',
+        //           style: AppTextStyle.titleMedium.copyWith(
+        //             color: AppColors.primary,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        //       SessionCheckBlockListener(),
+        //     ],
+        //   ),
+        // ),
         const EgyptDateTimeBadge(),
-        _SingleSessionButton(onTap: () => _onSingleSession(context)),
+        _SingleSessionButton(
+          fee: context.select<ReceptionCubit, double?>(
+            (c) => c.state.sessionFee,
+          ),
+          onTap: () => _onSingleSession(context),
+        ),
       ],
     );
   }
@@ -151,7 +157,16 @@ class _TopInfo extends StatelessWidget {
 
 class _SingleSessionButton extends StatelessWidget {
   final VoidCallback onTap;
-  const _SingleSessionButton({required this.onTap});
+  final double? fee;
+  const _SingleSessionButton({required this.onTap, this.fee});
+
+  String get _label {
+    if (fee == null) return 'اضافة حصه فرديه';
+    final v = fee! == fee!.roundToDouble()
+        ? fee!.toStringAsFixed(0)
+        : fee!.toStringAsFixed(2);
+    return 'اضافة حصه فرديه • $v ج.م';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +179,7 @@ class _SingleSessionButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
           child: Text(
-            'اضافة حصه فرديه',
+            _label,
             style: AppTextStyle.buttonMedium.copyWith(
               color: AppColors.textOnPrimary,
             ),

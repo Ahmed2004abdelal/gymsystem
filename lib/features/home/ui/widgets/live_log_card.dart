@@ -79,9 +79,16 @@ class LogiTileBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ReceptionCubit, ReceptionState>(
       buildWhen: (p, c) =>
-          p.firstFiveAttendancesStatus != c.firstFiveAttendancesStatus,
+          p.firstFiveAttendancesStatus != c.firstFiveAttendancesStatus ||
+          p.fiveAttendancesData != c.fiveAttendancesData,
       builder: (context, state) {
-        switch (state.firstFiveAttendancesStatus) {
+        // أثناء التحديث الصامت نفضل نعرض القائمة القديمة بدل الـ spinner
+        final refreshing =
+            state.firstFiveAttendancesStatus == ReceptionStatus.loading &&
+            state.fiveAttendancesData.isNotEmpty;
+        switch (refreshing
+            ? ReceptionStatus.success
+            : state.firstFiveAttendancesStatus) {
           case ReceptionStatus.initial:
           case ReceptionStatus.loading:
             return const Padding(

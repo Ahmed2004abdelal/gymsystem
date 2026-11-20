@@ -147,7 +147,7 @@ _StatusStyle _styleOf(_SubStatus s) {
   switch (s) {
     case _SubStatus.active:
       return const _StatusStyle(
-        color: AppColors.statusActive,
+        color: AppColors.onStatusActive,
         bg: AppColors.statusActiveBg,
         border: AppColors.statusActiveBorder,
         chipIcon: Icons.check_circle_outline_rounded,
@@ -159,7 +159,7 @@ _StatusStyle _styleOf(_SubStatus s) {
       );
     case _SubStatus.expiring:
       return const _StatusStyle(
-        color: AppColors.statusExpiring,
+        color: AppColors.onStatusExpiring,
         bg: AppColors.statusExpiringBg,
         border: AppColors.statusExpiringBorder,
         chipIcon: Icons.warning_amber_rounded,
@@ -654,6 +654,7 @@ class _Actions extends StatelessWidget {
 
   void _logedin(BuildContext context) {
     context.read<ReceptionCubit>().memberLogedin();
+    // context.read<ReceptionCubit>().liveAttendance();
   }
 
   @override
@@ -861,7 +862,7 @@ class _SessionsBlock extends StatelessWidget {
             child: LinearProgressIndicator(
               value: ratio,
               minHeight: 8,
-              color: color,
+              color: AppColors.secondary,
               backgroundColor: AppColors.strokeDefault,
             ),
           ),

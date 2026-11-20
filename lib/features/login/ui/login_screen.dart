@@ -589,7 +589,7 @@ class _BrandPanel extends StatelessWidget {
 
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFF0E1015),
+        color: AppColors.surface,
         border: Border(right: BorderSide(color: AppColors.strokeDefault)),
       ),
       child: LayoutBuilder(
@@ -783,7 +783,7 @@ class _FeatureTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF13161C),
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.strokeDefault),
       ),

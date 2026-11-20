@@ -1,6 +1,7 @@
 import 'package:gymsystem/core/networking/api_error_handler.dart';
 import 'package:gymsystem/core/networking/api_result.dart';
 import 'package:gymsystem/core/networking/api_service.dart';
+import 'package:gymsystem/features/home/data/models/daily_visitiror_model.dart';
 import 'package:gymsystem/features/home/data/models/member_checkin_model.dart';
 import 'package:gymsystem/features/home/data/models/member_logedin_request_model.dart';
 import 'package:gymsystem/features/home/data/models/member_logedin_response_model.dart';
@@ -74,6 +75,15 @@ class ReceptionRepo {
       final response = await _apiService.renewSubscription(
         MemberRenewSubModel(memberId: memberId),
       );
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<DailyVisitirorModel>> dailyVisitorsToday() async {
+    try {
+      final response = await _apiService.dailyVisitorsToday();
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

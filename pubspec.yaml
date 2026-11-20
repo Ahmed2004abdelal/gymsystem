@@ -2,7 +2,7 @@ name: gymsystem
 description: "A new Flutter project."
 publish_to: "none"
 
-version: 1.0.2+3
+version: 1.0.2+4
 
 environment:
   sdk: ^3.13.2
@@ -48,11 +48,18 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # assets:
-  #   - assets/images/
-  #   - assets/icons/
+  assets:
+    - assets/images/
+    - assets/icons/
 
   # fonts:
   #   - family: YourFont
   #     fonts:
   #       - asset: assets/fonts/YourFont-Regular.ttf
+
+flutter_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path_android: "assets/images/icon-launcher.png"
+  image_path_ios: "assets/images/icon-launcher.png"

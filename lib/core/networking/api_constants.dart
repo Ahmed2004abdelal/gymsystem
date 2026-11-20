@@ -10,6 +10,7 @@ class ApiConstants {
   static const String memberLogedin = 'Attendance/check-in';
   static const String sessionCheckIn = 'DailyVisitors/check-in';
   static const String attendanceTable = 'Attendance/filtered';
+  static const String dailyVisitorsToday = 'DailyVisitors/today';
 
   //register member
   static const String packages = 'Subscriptions/available-packages';

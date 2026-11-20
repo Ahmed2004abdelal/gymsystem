@@ -6,6 +6,7 @@ import 'package:gymsystem/features/activities/data/models/make_activity_sub_requ
 import 'package:gymsystem/features/activities/data/models/make_activity_sub_response_model.dart';
 import 'package:gymsystem/features/activities/data/models/member_activity_logedin_model.dart';
 import 'package:gymsystem/features/home/data/models/attendance_table_model.dart';
+import 'package:gymsystem/features/home/data/models/daily_visitiror_model.dart';
 import 'package:gymsystem/features/home/data/models/member_checkin_model.dart';
 import 'package:gymsystem/features/home/data/models/member_logedin_request_model.dart';
 import 'package:gymsystem/features/home/data/models/member_logedin_response_model.dart';
@@ -136,4 +137,7 @@ abstract class ApiService {
   Future<List<MemberActivityLogedinModel>> memberActivitiesAttendance(
     @Path("memberCode") String memberCode,
   );
+
+  @GET(ApiConstants.dailyVisitorsToday)
+  Future<DailyVisitirorModel> dailyVisitorsToday();
 }

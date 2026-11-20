@@ -32,6 +32,10 @@ Future<NewestFirstPage<T>> fetchNewestFirst<T>({
   required int page,
   required int size,
   required Future<({List<T> items, int total})> Function(int serverPage) fetch,
+
+  /// مفتاح الوقت/الـ id للعنصر: لو اتبعت، بنكتشف ترتيب السيرفر تلقائياً
+  /// (تصاعدي أو تنازلي) وبنرتّب الصفحة من الأحدث للأقدم في الحالتين.
+  Comparable Function(T item)? sortKey,
 }) async {
   if (!kNewestFirst) {
     final r = await fetch(page);
@@ -41,6 +45,18 @@ Future<NewestFirstPage<T>> fetchNewestFirst<T>({
   final first = await fetch(1);
   final n = first.total;
   if (n == 0) return const NewestFirstPage([], 0);
+
+  // السيرفر أصلاً بيرجّع الأحدث أولاً -> ترقيم عادي + ترتيب تنازلي للصفحة
+  if (sortKey != null && first.items.length >= 2) {
+    final a = sortKey(first.items.first);
+    final b = sortKey(first.items.last);
+    if (a.compareTo(b) > 0) {
+      final r = page == 1 ? first : await fetch(page);
+      final items = [...r.items]
+        ..sort((x, y) => sortKey(y).compareTo(sortKey(x)));
+      return NewestFirstPage(items, n);
+    }
+  }
 
   // مواضع العناصر (0-based) بترتيب السيرفر التصاعدي اللي بتقابل الصفحة دي
   final hi = n - 1 - (page - 1) * size;
@@ -60,5 +76,9 @@ Future<NewestFirstPage<T>> fetchNewestFirst<T>({
   final end = math.min(hi - offset + 1, all.length);
   if (start >= end) return NewestFirstPage(const [], n);
 
-  return NewestFirstPage(all.sublist(start, end).reversed.toList(), n);
+  final items = all.sublist(start, end).reversed.toList();
+  if (sortKey != null) {
+    items.sort((x, y) => sortKey(y).compareTo(sortKey(x)));
+  }
+  return NewestFirstPage(items, n);
 }

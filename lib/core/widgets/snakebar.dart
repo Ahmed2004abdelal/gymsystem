@@ -1,6 +1,5 @@
-import 'dart:ui' show Color;
-
 import 'package:flutter/material.dart';
+import 'package:gymsystem/core/theme/app_colors.dart';
 import 'package:gymsystem/core/theme/app_text_style.dart';
 
 enum SnackType { success, error }
@@ -8,10 +7,10 @@ enum SnackType { success, error }
 class AppSnackBar {
   const AppSnackBar._();
 
-  static const _successBg = Color(0xFF14532D);
-  static const _successFg = Color(0xFF86EFAC);
-  static const _errorBg = Color(0xFF7F1D1D);
-  static const _errorFg = Color(0xFFFCA5A5);
+  static const Color _successBg = AppColors.statusActiveBg;
+  static const Color _successFg = Color(0xFFFFFFFF);
+  static const Color _errorBg = AppColors.statusExpiredBg;
+  static const Color _errorFg = Color(0xFFFFFFFF);
 
   static void show(
     BuildContext context, {
@@ -21,6 +20,7 @@ class AppSnackBar {
     final isSuccess = type == SnackType.success;
     final bg = isSuccess ? _successBg : _errorBg;
     final fg = isSuccess ? _successFg : _errorFg;
+    final iconColor = isSuccess ? AppColors.statusActive : AppColors.statusExpired;
 
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -43,7 +43,7 @@ class AppSnackBar {
                   isSuccess
                       ? Icons.check_circle_rounded
                       : Icons.error_outline_rounded,
-                  color: fg,
+                  color: iconColor,
                   size: 22,
                 ),
                 const SizedBox(width: 12),

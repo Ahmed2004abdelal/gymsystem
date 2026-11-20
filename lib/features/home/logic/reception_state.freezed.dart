@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ReceptionState {
 
- ReceptionStatus get memberCheckinStatus; ReceptionStatus get memberLogedinStatus; ReceptionStatus get memberShowCardStatus; ReceptionStatus get liveAttendanceStatus; ReceptionStatus get sessionsCheckInStatus; ReceptionStatus get renewSubscriptionStatus; ReceptionStatus get firstFiveAttendancesStatus; List<MemberLogedinResponseModel> get fiveAttendancesData; MemberCheckintModel? get memberCheckinData; List<MemberLogedinResponseModel>? get liveAttendanceData; MemberShowCardModel? get memberShowCardData; String? get errorMessage;
+ ReceptionStatus get memberCheckinStatus; ReceptionStatus get memberLogedinStatus; ReceptionStatus get memberShowCardStatus; ReceptionStatus get liveAttendanceStatus; ReceptionStatus get sessionsCheckInStatus; ReceptionStatus get renewSubscriptionStatus; ReceptionStatus get dailyVisitorStatus; ReceptionStatus get firstFiveAttendancesStatus; List<MemberLogedinResponseModel> get fiveAttendancesData; MemberCheckintModel? get memberCheckinData; List<MemberLogedinResponseModel>? get liveAttendanceData; MemberShowCardModel? get memberShowCardData; DailyVisitirorModel? get dailyVisitorData; String? get errorMessage;
 /// Create a copy of ReceptionState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +27,20 @@ $ReceptionStateCopyWith<ReceptionState> get copyWith => _$ReceptionStateCopyWith
 @override
 bool operator ==(Object other) {
   final _this = this as ReceptionState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReceptionState&&(identical(other.memberCheckinStatus, _this.memberCheckinStatus) || other.memberCheckinStatus == _this.memberCheckinStatus)&&(identical(other.memberLogedinStatus, _this.memberLogedinStatus) || other.memberLogedinStatus == _this.memberLogedinStatus)&&(identical(other.memberShowCardStatus, _this.memberShowCardStatus) || other.memberShowCardStatus == _this.memberShowCardStatus)&&(identical(other.liveAttendanceStatus, _this.liveAttendanceStatus) || other.liveAttendanceStatus == _this.liveAttendanceStatus)&&(identical(other.sessionsCheckInStatus, _this.sessionsCheckInStatus) || other.sessionsCheckInStatus == _this.sessionsCheckInStatus)&&(identical(other.renewSubscriptionStatus, _this.renewSubscriptionStatus) || other.renewSubscriptionStatus == _this.renewSubscriptionStatus)&&(identical(other.firstFiveAttendancesStatus, _this.firstFiveAttendancesStatus) || other.firstFiveAttendancesStatus == _this.firstFiveAttendancesStatus)&&const DeepCollectionEquality().equals(other.fiveAttendancesData, _this.fiveAttendancesData)&&(identical(other.memberCheckinData, _this.memberCheckinData) || other.memberCheckinData == _this.memberCheckinData)&&const DeepCollectionEquality().equals(other.liveAttendanceData, _this.liveAttendanceData)&&(identical(other.memberShowCardData, _this.memberShowCardData) || other.memberShowCardData == _this.memberShowCardData)&&(identical(other.errorMessage, _this.errorMessage) || other.errorMessage == _this.errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReceptionState&&(identical(other.memberCheckinStatus, _this.memberCheckinStatus) || other.memberCheckinStatus == _this.memberCheckinStatus)&&(identical(other.memberLogedinStatus, _this.memberLogedinStatus) || other.memberLogedinStatus == _this.memberLogedinStatus)&&(identical(other.memberShowCardStatus, _this.memberShowCardStatus) || other.memberShowCardStatus == _this.memberShowCardStatus)&&(identical(other.liveAttendanceStatus, _this.liveAttendanceStatus) || other.liveAttendanceStatus == _this.liveAttendanceStatus)&&(identical(other.sessionsCheckInStatus, _this.sessionsCheckInStatus) || other.sessionsCheckInStatus == _this.sessionsCheckInStatus)&&(identical(other.renewSubscriptionStatus, _this.renewSubscriptionStatus) || other.renewSubscriptionStatus == _this.renewSubscriptionStatus)&&(identical(other.dailyVisitorStatus, _this.dailyVisitorStatus) || other.dailyVisitorStatus == _this.dailyVisitorStatus)&&(identical(other.firstFiveAttendancesStatus, _this.firstFiveAttendancesStatus) || other.firstFiveAttendancesStatus == _this.firstFiveAttendancesStatus)&&const DeepCollectionEquality().equals(other.fiveAttendancesData, _this.fiveAttendancesData)&&(identical(other.memberCheckinData, _this.memberCheckinData) || other.memberCheckinData == _this.memberCheckinData)&&const DeepCollectionEquality().equals(other.liveAttendanceData, _this.liveAttendanceData)&&(identical(other.memberShowCardData, _this.memberShowCardData) || other.memberShowCardData == _this.memberShowCardData)&&(identical(other.dailyVisitorData, _this.dailyVisitorData) || other.dailyVisitorData == _this.dailyVisitorData)&&(identical(other.errorMessage, _this.errorMessage) || other.errorMessage == _this.errorMessage));
 }
 
 
 @override
 int get hashCode {
   final _this = this as ReceptionState;
-  return Object.hash(runtimeType,_this.memberCheckinStatus,_this.memberLogedinStatus,_this.memberShowCardStatus,_this.liveAttendanceStatus,_this.sessionsCheckInStatus,_this.renewSubscriptionStatus,_this.firstFiveAttendancesStatus,const DeepCollectionEquality().hash(_this.fiveAttendancesData),_this.memberCheckinData,const DeepCollectionEquality().hash(_this.liveAttendanceData),_this.memberShowCardData,_this.errorMessage);
+  return Object.hash(runtimeType,_this.memberCheckinStatus,_this.memberLogedinStatus,_this.memberShowCardStatus,_this.liveAttendanceStatus,_this.sessionsCheckInStatus,_this.renewSubscriptionStatus,_this.dailyVisitorStatus,_this.firstFiveAttendancesStatus,const DeepCollectionEquality().hash(_this.fiveAttendancesData),_this.memberCheckinData,const DeepCollectionEquality().hash(_this.liveAttendanceData),_this.memberShowCardData,_this.dailyVisitorData,_this.errorMessage);
 }
 
 @override
 String toString() {
   final _this = this as ReceptionState;
-  return 'ReceptionState(memberCheckinStatus: ${_this.memberCheckinStatus}, memberLogedinStatus: ${_this.memberLogedinStatus}, memberShowCardStatus: ${_this.memberShowCardStatus}, liveAttendanceStatus: ${_this.liveAttendanceStatus}, sessionsCheckInStatus: ${_this.sessionsCheckInStatus}, renewSubscriptionStatus: ${_this.renewSubscriptionStatus}, firstFiveAttendancesStatus: ${_this.firstFiveAttendancesStatus}, fiveAttendancesData: ${_this.fiveAttendancesData}, memberCheckinData: ${_this.memberCheckinData}, liveAttendanceData: ${_this.liveAttendanceData}, memberShowCardData: ${_this.memberShowCardData}, errorMessage: ${_this.errorMessage})';
+  return 'ReceptionState(memberCheckinStatus: ${_this.memberCheckinStatus}, memberLogedinStatus: ${_this.memberLogedinStatus}, memberShowCardStatus: ${_this.memberShowCardStatus}, liveAttendanceStatus: ${_this.liveAttendanceStatus}, sessionsCheckInStatus: ${_this.sessionsCheckInStatus}, renewSubscriptionStatus: ${_this.renewSubscriptionStatus}, dailyVisitorStatus: ${_this.dailyVisitorStatus}, firstFiveAttendancesStatus: ${_this.firstFiveAttendancesStatus}, fiveAttendancesData: ${_this.fiveAttendancesData}, memberCheckinData: ${_this.memberCheckinData}, liveAttendanceData: ${_this.liveAttendanceData}, memberShowCardData: ${_this.memberShowCardData}, dailyVisitorData: ${_this.dailyVisitorData}, errorMessage: ${_this.errorMessage})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $ReceptionStateCopyWith<$Res>  {
   factory $ReceptionStateCopyWith(ReceptionState value, $Res Function(ReceptionState) _then) = _$ReceptionStateCopyWithImpl;
 @useResult
 $Res call({
- ReceptionStatus memberCheckinStatus, ReceptionStatus memberLogedinStatus, ReceptionStatus memberShowCardStatus, ReceptionStatus liveAttendanceStatus, ReceptionStatus sessionsCheckInStatus, ReceptionStatus renewSubscriptionStatus, ReceptionStatus firstFiveAttendancesStatus, List<MemberLogedinResponseModel> fiveAttendancesData, MemberCheckintModel? memberCheckinData, List<MemberLogedinResponseModel>? liveAttendanceData, MemberShowCardModel? memberShowCardData, String? errorMessage
+ ReceptionStatus memberCheckinStatus, ReceptionStatus memberLogedinStatus, ReceptionStatus memberShowCardStatus, ReceptionStatus liveAttendanceStatus, ReceptionStatus sessionsCheckInStatus, ReceptionStatus renewSubscriptionStatus, ReceptionStatus dailyVisitorStatus, ReceptionStatus firstFiveAttendancesStatus, List<MemberLogedinResponseModel> fiveAttendancesData, MemberCheckintModel? memberCheckinData, List<MemberLogedinResponseModel>? liveAttendanceData, MemberShowCardModel? memberShowCardData, DailyVisitirorModel? dailyVisitorData, String? errorMessage
 });
 
 
@@ -68,7 +68,7 @@ class _$ReceptionStateCopyWithImpl<$Res>
 
 /// Create a copy of ReceptionState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? memberCheckinStatus = null,Object? memberLogedinStatus = null,Object? memberShowCardStatus = null,Object? liveAttendanceStatus = null,Object? sessionsCheckInStatus = null,Object? renewSubscriptionStatus = null,Object? firstFiveAttendancesStatus = null,Object? fiveAttendancesData = null,Object? memberCheckinData = freezed,Object? liveAttendanceData = freezed,Object? memberShowCardData = freezed,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? memberCheckinStatus = null,Object? memberLogedinStatus = null,Object? memberShowCardStatus = null,Object? liveAttendanceStatus = null,Object? sessionsCheckInStatus = null,Object? renewSubscriptionStatus = null,Object? dailyVisitorStatus = null,Object? firstFiveAttendancesStatus = null,Object? fiveAttendancesData = null,Object? memberCheckinData = freezed,Object? liveAttendanceData = freezed,Object? memberShowCardData = freezed,Object? dailyVisitorData = freezed,Object? errorMessage = freezed,}) {
   return _then(ReceptionState(
 memberCheckinStatus: null == memberCheckinStatus ? _self.memberCheckinStatus : memberCheckinStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,memberLogedinStatus: null == memberLogedinStatus ? _self.memberLogedinStatus : memberLogedinStatus // ignore: cast_nullable_to_non_nullable
@@ -76,12 +76,14 @@ as ReceptionStatus,memberShowCardStatus: null == memberShowCardStatus ? _self.me
 as ReceptionStatus,liveAttendanceStatus: null == liveAttendanceStatus ? _self.liveAttendanceStatus : liveAttendanceStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,sessionsCheckInStatus: null == sessionsCheckInStatus ? _self.sessionsCheckInStatus : sessionsCheckInStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,renewSubscriptionStatus: null == renewSubscriptionStatus ? _self.renewSubscriptionStatus : renewSubscriptionStatus // ignore: cast_nullable_to_non_nullable
+as ReceptionStatus,dailyVisitorStatus: null == dailyVisitorStatus ? _self.dailyVisitorStatus : dailyVisitorStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,firstFiveAttendancesStatus: null == firstFiveAttendancesStatus ? _self.firstFiveAttendancesStatus : firstFiveAttendancesStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,fiveAttendancesData: null == fiveAttendancesData ? _self.fiveAttendancesData : fiveAttendancesData // ignore: cast_nullable_to_non_nullable
 as List<MemberLogedinResponseModel>,memberCheckinData: freezed == memberCheckinData ? _self.memberCheckinData : memberCheckinData // ignore: cast_nullable_to_non_nullable
 as MemberCheckintModel?,liveAttendanceData: freezed == liveAttendanceData ? _self.liveAttendanceData : liveAttendanceData // ignore: cast_nullable_to_non_nullable
 as List<MemberLogedinResponseModel>?,memberShowCardData: freezed == memberShowCardData ? _self.memberShowCardData : memberShowCardData // ignore: cast_nullable_to_non_nullable
-as MemberShowCardModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as MemberShowCardModel?,dailyVisitorData: freezed == dailyVisitorData ? _self.dailyVisitorData : dailyVisitorData // ignore: cast_nullable_to_non_nullable
+as DailyVisitirorModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -179,10 +181,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ReceptionStatus memberCheckinStatus,  ReceptionStatus memberLogedinStatus,  ReceptionStatus memberShowCardStatus,  ReceptionStatus liveAttendanceStatus,  ReceptionStatus sessionsCheckInStatus,  ReceptionStatus renewSubscriptionStatus,  ReceptionStatus firstFiveAttendancesStatus,  List<MemberLogedinResponseModel> fiveAttendancesData,  MemberCheckintModel? memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData,  MemberShowCardModel? memberShowCardData,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ReceptionStatus memberCheckinStatus,  ReceptionStatus memberLogedinStatus,  ReceptionStatus memberShowCardStatus,  ReceptionStatus liveAttendanceStatus,  ReceptionStatus sessionsCheckInStatus,  ReceptionStatus renewSubscriptionStatus,  ReceptionStatus dailyVisitorStatus,  ReceptionStatus firstFiveAttendancesStatus,  List<MemberLogedinResponseModel> fiveAttendancesData,  MemberCheckintModel? memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData,  MemberShowCardModel? memberShowCardData,  DailyVisitirorModel? dailyVisitorData,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReceptionState() when $default != null:
-return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.memberShowCardStatus,_that.liveAttendanceStatus,_that.sessionsCheckInStatus,_that.renewSubscriptionStatus,_that.firstFiveAttendancesStatus,_that.fiveAttendancesData,_that.memberCheckinData,_that.liveAttendanceData,_that.memberShowCardData,_that.errorMessage);case _:
+return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.memberShowCardStatus,_that.liveAttendanceStatus,_that.sessionsCheckInStatus,_that.renewSubscriptionStatus,_that.dailyVisitorStatus,_that.firstFiveAttendancesStatus,_that.fiveAttendancesData,_that.memberCheckinData,_that.liveAttendanceData,_that.memberShowCardData,_that.dailyVisitorData,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -200,10 +202,10 @@ return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.member
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ReceptionStatus memberCheckinStatus,  ReceptionStatus memberLogedinStatus,  ReceptionStatus memberShowCardStatus,  ReceptionStatus liveAttendanceStatus,  ReceptionStatus sessionsCheckInStatus,  ReceptionStatus renewSubscriptionStatus,  ReceptionStatus firstFiveAttendancesStatus,  List<MemberLogedinResponseModel> fiveAttendancesData,  MemberCheckintModel? memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData,  MemberShowCardModel? memberShowCardData,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ReceptionStatus memberCheckinStatus,  ReceptionStatus memberLogedinStatus,  ReceptionStatus memberShowCardStatus,  ReceptionStatus liveAttendanceStatus,  ReceptionStatus sessionsCheckInStatus,  ReceptionStatus renewSubscriptionStatus,  ReceptionStatus dailyVisitorStatus,  ReceptionStatus firstFiveAttendancesStatus,  List<MemberLogedinResponseModel> fiveAttendancesData,  MemberCheckintModel? memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData,  MemberShowCardModel? memberShowCardData,  DailyVisitirorModel? dailyVisitorData,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _ReceptionState():
-return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.memberShowCardStatus,_that.liveAttendanceStatus,_that.sessionsCheckInStatus,_that.renewSubscriptionStatus,_that.firstFiveAttendancesStatus,_that.fiveAttendancesData,_that.memberCheckinData,_that.liveAttendanceData,_that.memberShowCardData,_that.errorMessage);case _:
+return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.memberShowCardStatus,_that.liveAttendanceStatus,_that.sessionsCheckInStatus,_that.renewSubscriptionStatus,_that.dailyVisitorStatus,_that.firstFiveAttendancesStatus,_that.fiveAttendancesData,_that.memberCheckinData,_that.liveAttendanceData,_that.memberShowCardData,_that.dailyVisitorData,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -220,10 +222,10 @@ return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.member
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ReceptionStatus memberCheckinStatus,  ReceptionStatus memberLogedinStatus,  ReceptionStatus memberShowCardStatus,  ReceptionStatus liveAttendanceStatus,  ReceptionStatus sessionsCheckInStatus,  ReceptionStatus renewSubscriptionStatus,  ReceptionStatus firstFiveAttendancesStatus,  List<MemberLogedinResponseModel> fiveAttendancesData,  MemberCheckintModel? memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData,  MemberShowCardModel? memberShowCardData,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ReceptionStatus memberCheckinStatus,  ReceptionStatus memberLogedinStatus,  ReceptionStatus memberShowCardStatus,  ReceptionStatus liveAttendanceStatus,  ReceptionStatus sessionsCheckInStatus,  ReceptionStatus renewSubscriptionStatus,  ReceptionStatus dailyVisitorStatus,  ReceptionStatus firstFiveAttendancesStatus,  List<MemberLogedinResponseModel> fiveAttendancesData,  MemberCheckintModel? memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData,  MemberShowCardModel? memberShowCardData,  DailyVisitirorModel? dailyVisitorData,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _ReceptionState() when $default != null:
-return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.memberShowCardStatus,_that.liveAttendanceStatus,_that.sessionsCheckInStatus,_that.renewSubscriptionStatus,_that.firstFiveAttendancesStatus,_that.fiveAttendancesData,_that.memberCheckinData,_that.liveAttendanceData,_that.memberShowCardData,_that.errorMessage);case _:
+return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.memberShowCardStatus,_that.liveAttendanceStatus,_that.sessionsCheckInStatus,_that.renewSubscriptionStatus,_that.dailyVisitorStatus,_that.firstFiveAttendancesStatus,_that.fiveAttendancesData,_that.memberCheckinData,_that.liveAttendanceData,_that.memberShowCardData,_that.dailyVisitorData,_that.errorMessage);case _:
   return null;
 
 }
@@ -234,8 +236,8 @@ return $default(_that.memberCheckinStatus,_that.memberLogedinStatus,_that.member
 /// @nodoc
 
 
-class _ReceptionState implements ReceptionState {
-  const _ReceptionState({this.memberCheckinStatus = ReceptionStatus.initial, this.memberLogedinStatus = ReceptionStatus.initial, this.memberShowCardStatus = ReceptionStatus.initial, this.liveAttendanceStatus = ReceptionStatus.initial, this.sessionsCheckInStatus = ReceptionStatus.initial, this.renewSubscriptionStatus = ReceptionStatus.initial, this.firstFiveAttendancesStatus = ReceptionStatus.initial,  List<MemberLogedinResponseModel> fiveAttendancesData = const [], this.memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData, this.memberShowCardData, this.errorMessage}): _fiveAttendancesData = fiveAttendancesData,_liveAttendanceData = liveAttendanceData;
+class _ReceptionState extends ReceptionState {
+  const _ReceptionState({this.memberCheckinStatus = ReceptionStatus.initial, this.memberLogedinStatus = ReceptionStatus.initial, this.memberShowCardStatus = ReceptionStatus.initial, this.liveAttendanceStatus = ReceptionStatus.initial, this.sessionsCheckInStatus = ReceptionStatus.initial, this.renewSubscriptionStatus = ReceptionStatus.initial, this.dailyVisitorStatus = ReceptionStatus.initial, this.firstFiveAttendancesStatus = ReceptionStatus.initial,  List<MemberLogedinResponseModel> fiveAttendancesData = const [], this.memberCheckinData,  List<MemberLogedinResponseModel>? liveAttendanceData, this.memberShowCardData, this.dailyVisitorData, this.errorMessage}): _fiveAttendancesData = fiveAttendancesData,_liveAttendanceData = liveAttendanceData,super._();
   
 
 @override@JsonKey() final  ReceptionStatus memberCheckinStatus;
@@ -244,6 +246,7 @@ class _ReceptionState implements ReceptionState {
 @override@JsonKey() final  ReceptionStatus liveAttendanceStatus;
 @override@JsonKey() final  ReceptionStatus sessionsCheckInStatus;
 @override@JsonKey() final  ReceptionStatus renewSubscriptionStatus;
+@override@JsonKey() final  ReceptionStatus dailyVisitorStatus;
 @override@JsonKey() final  ReceptionStatus firstFiveAttendancesStatus;
  final  List<MemberLogedinResponseModel> _fiveAttendancesData;
 @override@JsonKey() List<MemberLogedinResponseModel> get fiveAttendancesData {
@@ -263,6 +266,7 @@ class _ReceptionState implements ReceptionState {
 }
 
 @override final  MemberShowCardModel? memberShowCardData;
+@override final  DailyVisitirorModel? dailyVisitorData;
 @override final  String? errorMessage;
 
 /// Create a copy of ReceptionState
@@ -275,18 +279,18 @@ _$ReceptionStateCopyWith<_ReceptionState> get copyWith => __$ReceptionStateCopyW
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReceptionState&&(identical(other.memberCheckinStatus, memberCheckinStatus) || other.memberCheckinStatus == memberCheckinStatus)&&(identical(other.memberLogedinStatus, memberLogedinStatus) || other.memberLogedinStatus == memberLogedinStatus)&&(identical(other.memberShowCardStatus, memberShowCardStatus) || other.memberShowCardStatus == memberShowCardStatus)&&(identical(other.liveAttendanceStatus, liveAttendanceStatus) || other.liveAttendanceStatus == liveAttendanceStatus)&&(identical(other.sessionsCheckInStatus, sessionsCheckInStatus) || other.sessionsCheckInStatus == sessionsCheckInStatus)&&(identical(other.renewSubscriptionStatus, renewSubscriptionStatus) || other.renewSubscriptionStatus == renewSubscriptionStatus)&&(identical(other.firstFiveAttendancesStatus, firstFiveAttendancesStatus) || other.firstFiveAttendancesStatus == firstFiveAttendancesStatus)&&const DeepCollectionEquality().equals(other.fiveAttendancesData, _fiveAttendancesData)&&(identical(other.memberCheckinData, memberCheckinData) || other.memberCheckinData == memberCheckinData)&&const DeepCollectionEquality().equals(other.liveAttendanceData, _liveAttendanceData)&&(identical(other.memberShowCardData, memberShowCardData) || other.memberShowCardData == memberShowCardData)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReceptionState&&(identical(other.memberCheckinStatus, memberCheckinStatus) || other.memberCheckinStatus == memberCheckinStatus)&&(identical(other.memberLogedinStatus, memberLogedinStatus) || other.memberLogedinStatus == memberLogedinStatus)&&(identical(other.memberShowCardStatus, memberShowCardStatus) || other.memberShowCardStatus == memberShowCardStatus)&&(identical(other.liveAttendanceStatus, liveAttendanceStatus) || other.liveAttendanceStatus == liveAttendanceStatus)&&(identical(other.sessionsCheckInStatus, sessionsCheckInStatus) || other.sessionsCheckInStatus == sessionsCheckInStatus)&&(identical(other.renewSubscriptionStatus, renewSubscriptionStatus) || other.renewSubscriptionStatus == renewSubscriptionStatus)&&(identical(other.dailyVisitorStatus, dailyVisitorStatus) || other.dailyVisitorStatus == dailyVisitorStatus)&&(identical(other.firstFiveAttendancesStatus, firstFiveAttendancesStatus) || other.firstFiveAttendancesStatus == firstFiveAttendancesStatus)&&const DeepCollectionEquality().equals(other.fiveAttendancesData, _fiveAttendancesData)&&(identical(other.memberCheckinData, memberCheckinData) || other.memberCheckinData == memberCheckinData)&&const DeepCollectionEquality().equals(other.liveAttendanceData, _liveAttendanceData)&&(identical(other.memberShowCardData, memberShowCardData) || other.memberShowCardData == memberShowCardData)&&(identical(other.dailyVisitorData, dailyVisitorData) || other.dailyVisitorData == dailyVisitorData)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,memberCheckinStatus,memberLogedinStatus,memberShowCardStatus,liveAttendanceStatus,sessionsCheckInStatus,renewSubscriptionStatus,firstFiveAttendancesStatus,const DeepCollectionEquality().hash(_fiveAttendancesData),memberCheckinData,const DeepCollectionEquality().hash(_liveAttendanceData),memberShowCardData,errorMessage);
+    return Object.hash(runtimeType,memberCheckinStatus,memberLogedinStatus,memberShowCardStatus,liveAttendanceStatus,sessionsCheckInStatus,renewSubscriptionStatus,dailyVisitorStatus,firstFiveAttendancesStatus,const DeepCollectionEquality().hash(_fiveAttendancesData),memberCheckinData,const DeepCollectionEquality().hash(_liveAttendanceData),memberShowCardData,dailyVisitorData,errorMessage);
 }
 
 @override
 String toString() {
-    return 'ReceptionState(memberCheckinStatus: $memberCheckinStatus, memberLogedinStatus: $memberLogedinStatus, memberShowCardStatus: $memberShowCardStatus, liveAttendanceStatus: $liveAttendanceStatus, sessionsCheckInStatus: $sessionsCheckInStatus, renewSubscriptionStatus: $renewSubscriptionStatus, firstFiveAttendancesStatus: $firstFiveAttendancesStatus, fiveAttendancesData: $fiveAttendancesData, memberCheckinData: $memberCheckinData, liveAttendanceData: $liveAttendanceData, memberShowCardData: $memberShowCardData, errorMessage: $errorMessage)';
+    return 'ReceptionState(memberCheckinStatus: $memberCheckinStatus, memberLogedinStatus: $memberLogedinStatus, memberShowCardStatus: $memberShowCardStatus, liveAttendanceStatus: $liveAttendanceStatus, sessionsCheckInStatus: $sessionsCheckInStatus, renewSubscriptionStatus: $renewSubscriptionStatus, dailyVisitorStatus: $dailyVisitorStatus, firstFiveAttendancesStatus: $firstFiveAttendancesStatus, fiveAttendancesData: $fiveAttendancesData, memberCheckinData: $memberCheckinData, liveAttendanceData: $liveAttendanceData, memberShowCardData: $memberShowCardData, dailyVisitorData: $dailyVisitorData, errorMessage: $errorMessage)';
 }
 
 
@@ -297,7 +301,7 @@ abstract mixin class _$ReceptionStateCopyWith<$Res> implements $ReceptionStateCo
   factory _$ReceptionStateCopyWith(_ReceptionState value, $Res Function(_ReceptionState) _then) = __$ReceptionStateCopyWithImpl;
 @override @useResult
 $Res call({
- ReceptionStatus memberCheckinStatus, ReceptionStatus memberLogedinStatus, ReceptionStatus memberShowCardStatus, ReceptionStatus liveAttendanceStatus, ReceptionStatus sessionsCheckInStatus, ReceptionStatus renewSubscriptionStatus, ReceptionStatus firstFiveAttendancesStatus, List<MemberLogedinResponseModel> fiveAttendancesData, MemberCheckintModel? memberCheckinData, List<MemberLogedinResponseModel>? liveAttendanceData, MemberShowCardModel? memberShowCardData, String? errorMessage
+ ReceptionStatus memberCheckinStatus, ReceptionStatus memberLogedinStatus, ReceptionStatus memberShowCardStatus, ReceptionStatus liveAttendanceStatus, ReceptionStatus sessionsCheckInStatus, ReceptionStatus renewSubscriptionStatus, ReceptionStatus dailyVisitorStatus, ReceptionStatus firstFiveAttendancesStatus, List<MemberLogedinResponseModel> fiveAttendancesData, MemberCheckintModel? memberCheckinData, List<MemberLogedinResponseModel>? liveAttendanceData, MemberShowCardModel? memberShowCardData, DailyVisitirorModel? dailyVisitorData, String? errorMessage
 });
 
 
@@ -314,7 +318,7 @@ class __$ReceptionStateCopyWithImpl<$Res>
 
 /// Create a copy of ReceptionState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? memberCheckinStatus = null,Object? memberLogedinStatus = null,Object? memberShowCardStatus = null,Object? liveAttendanceStatus = null,Object? sessionsCheckInStatus = null,Object? renewSubscriptionStatus = null,Object? firstFiveAttendancesStatus = null,Object? fiveAttendancesData = null,Object? memberCheckinData = freezed,Object? liveAttendanceData = freezed,Object? memberShowCardData = freezed,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? memberCheckinStatus = null,Object? memberLogedinStatus = null,Object? memberShowCardStatus = null,Object? liveAttendanceStatus = null,Object? sessionsCheckInStatus = null,Object? renewSubscriptionStatus = null,Object? dailyVisitorStatus = null,Object? firstFiveAttendancesStatus = null,Object? fiveAttendancesData = null,Object? memberCheckinData = freezed,Object? liveAttendanceData = freezed,Object? memberShowCardData = freezed,Object? dailyVisitorData = freezed,Object? errorMessage = freezed,}) {
   return _then(_ReceptionState(
 memberCheckinStatus: null == memberCheckinStatus ? _self.memberCheckinStatus : memberCheckinStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,memberLogedinStatus: null == memberLogedinStatus ? _self.memberLogedinStatus : memberLogedinStatus // ignore: cast_nullable_to_non_nullable
@@ -322,12 +326,14 @@ as ReceptionStatus,memberShowCardStatus: null == memberShowCardStatus ? _self.me
 as ReceptionStatus,liveAttendanceStatus: null == liveAttendanceStatus ? _self.liveAttendanceStatus : liveAttendanceStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,sessionsCheckInStatus: null == sessionsCheckInStatus ? _self.sessionsCheckInStatus : sessionsCheckInStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,renewSubscriptionStatus: null == renewSubscriptionStatus ? _self.renewSubscriptionStatus : renewSubscriptionStatus // ignore: cast_nullable_to_non_nullable
+as ReceptionStatus,dailyVisitorStatus: null == dailyVisitorStatus ? _self.dailyVisitorStatus : dailyVisitorStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,firstFiveAttendancesStatus: null == firstFiveAttendancesStatus ? _self.firstFiveAttendancesStatus : firstFiveAttendancesStatus // ignore: cast_nullable_to_non_nullable
 as ReceptionStatus,fiveAttendancesData: null == fiveAttendancesData ? _self._fiveAttendancesData : fiveAttendancesData // ignore: cast_nullable_to_non_nullable
 as List<MemberLogedinResponseModel>,memberCheckinData: freezed == memberCheckinData ? _self.memberCheckinData : memberCheckinData // ignore: cast_nullable_to_non_nullable
 as MemberCheckintModel?,liveAttendanceData: freezed == liveAttendanceData ? _self._liveAttendanceData : liveAttendanceData // ignore: cast_nullable_to_non_nullable
 as List<MemberLogedinResponseModel>?,memberShowCardData: freezed == memberShowCardData ? _self.memberShowCardData : memberShowCardData // ignore: cast_nullable_to_non_nullable
-as MemberShowCardModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as MemberShowCardModel?,dailyVisitorData: freezed == dailyVisitorData ? _self.dailyVisitorData : dailyVisitorData // ignore: cast_nullable_to_non_nullable
+as DailyVisitirorModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

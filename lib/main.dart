@@ -34,6 +34,10 @@ import 'dart:io';
 //   runApp(const MyApp());
 // }
 
+/// window_manager works on desktop only; calling it on Android/iOS throws.
+bool get _isDesktop =>
+    Platform.isWindows || Platform.isLinux || Platform.isMacOS;
+
 void _log(String msg) {
   try {
     final base =
@@ -59,19 +63,21 @@ Future<void> main() async {
       _log('3 timezones');
       tzdata.initializeTimeZones();
 
-      _log('4 window');
-      await windowManager.ensureInitialized();
-      await windowManager.waitUntilReadyToShow(
-        const WindowOptions(
-          size: Size(1440, 900),
-          minimumSize: Size(1100, 700),
-          center: true,
-        ),
-        () async {
-          await windowManager.show();
-          await windowManager.focus();
-        },
-      );
+      if (_isDesktop) {
+        _log('4 window');
+        await windowManager.ensureInitialized();
+        await windowManager.waitUntilReadyToShow(
+          const WindowOptions(
+            size: Size(1440, 900),
+            minimumSize: Size(1440, 900), // window can't shrink below this
+            center: true,
+          ),
+          () async {
+            await windowManager.show();
+            await windowManager.focus();
+          },
+        );
+      }
 
       _log('5 runApp');
       runApp(const MyApp());
@@ -107,11 +113,22 @@ class MyApp extends StatelessWidget {
       builder: (context, child) =>
           Directionality(textDirection: TextDirection.rtl, child: child!),
       theme: ThemeData(
+        colorScheme: ColorScheme.dark(
+          primary: AppColors.primary,
+          onPrimary: AppColors.onPrimary,
+          secondary: AppColors.secondary,
+          onSecondary: AppColors.onSecondary,
+          error: AppColors.error,
+          onError: AppColors.onError,
+          surface: AppColors.surface,
+          onSurface: AppColors.onSurface,
+          brightness: Brightness.dark,
+        ),
         scaffoldBackgroundColor: AppColors.background,
         textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme),
       ),
       debugShowCheckedModeBanner: false,
-      title: 'GymSystem',
+      title: 'Heavy',
       // home: MemberProfileScreen(),
       initialRoute: isLoggedInUser ? Routes.sideBarMenu : Routes.login,
       onGenerateRoute: AppRouting.getRouting,

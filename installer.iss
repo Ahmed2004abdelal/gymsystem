@@ -1,6 +1,6 @@
-#define MyAppName "Boot Camp"
+#define MyAppName "Heavy"
 #define MyAppVersion GetEnv("APP_VERSION")
-#define MyAppExe "BootCamp.exe"
+#define MyAppExe "Heavy.exe"
 
 [Setup]
 AppId={{042064AA-3814-4BF3-8A32-A678A66B4A4D}
@@ -8,7 +8,7 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputBaseFilename=BootCamp-Setup-{#MyAppVersion}
+OutputBaseFilename=Heavy-Setup-{#MyAppVersion}
 OutputDir=Output
 Compression=lzma
 SolidCompression=yes

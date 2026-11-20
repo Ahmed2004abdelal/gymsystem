@@ -172,6 +172,7 @@ class AttendanceTableCubit extends Cubit<AttendanceTableState> {
       final res = await fetchNewestFirst(
         page: targetPage,
         size: size,
+        sortKey: (e) => e.checkInTime,
         fetch: (p) async {
           final r = await _repo.getAttendanceTable(
             pageNumber: p,

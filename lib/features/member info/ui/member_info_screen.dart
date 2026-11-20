@@ -525,7 +525,7 @@ class _SessionsBar extends StatelessWidget {
           child: LinearProgressIndicator(
             value: ratio,
             minHeight: 8,
-            color: color,
+            color: AppColors.secondary,
             backgroundColor: AppColors.strokeStrong,
           ),
         ),

@@ -192,7 +192,7 @@ class _MemberRow extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        hoverColor: AppColors.surfaceContainer.withValues(alpha: 0.5),
+        hoverColor: AppColors.surfaceHover,
         onTap: () {
           // context.pushNamed(Routes.memberInfoScreen, arguments: member);
           context.pushNamed(Routes.memberInfoScreen, arguments: member.code);
@@ -469,11 +469,10 @@ class _StatusPill extends StatelessWidget {
           label: 'منتهي',
         );
       case 'frozen':
-        const blue = Color(0xFF60A5FA);
         return (
-          color: blue,
-          bg: blue.withValues(alpha: 0.12),
-          border: blue.withValues(alpha: 0.35),
+          color: AppColors.onStatusFrozen,
+          bg: AppColors.statusFrozen.withValues(alpha: 0.12),
+          border: AppColors.statusFrozen.withValues(alpha: 0.35),
           label: 'مجمّد',
         );
       case '':

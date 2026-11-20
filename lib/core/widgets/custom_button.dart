@@ -5,7 +5,7 @@ import 'package:gymsystem/core/helper/spacer.dart';
 import 'package:gymsystem/core/theme/app_colors.dart';
 import 'package:gymsystem/core/theme/app_text_style.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends StatefulWidget {
   final String text;
   final VoidCallback? onPressed;
   final bool isLoading;
@@ -40,18 +40,28 @@ class CustomButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final bool isDisabled = onPressed == null || isLoading;
-    final Color bg = backgroundColor ?? AppColors.primary;
-    final Color fg = textColor ?? AppColors.textOnPrimary;
-    final double radius = context.rs(borderRadius);
+  State<CustomButton> createState() => _CustomButtonState();
+}
 
-    final double effectiveHeight = height != null
-        ? context.rs(height!)
+class _CustomButtonState extends State<CustomButton> {
+  bool _hovering = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDisabled = widget.onPressed == null || widget.isLoading;
+    final Color bg = widget.backgroundColor ?? AppColors.primary;
+    final Color hoverBg = widget.backgroundColor != null
+        ? widget.backgroundColor!
+        : AppColors.primaryHover;
+    final Color fg = widget.textColor ?? AppColors.textOnPrimary;
+    final double radius = context.rs(widget.borderRadius);
+
+    final double effectiveHeight = widget.height != null
+        ? context.rs(widget.height!)
         : Responsive.value(context, mobile: 48.0, tablet: 50.0, desktop: 52.0);
 
     final EdgeInsetsGeometry effectivePadding =
-        padding ??
+        widget.padding ??
         EdgeInsets.symmetric(
           horizontal: Responsive.value(
             context,
@@ -62,24 +72,28 @@ class CustomButton extends StatelessWidget {
         );
 
     final TextStyle effectiveTextStyle =
-        (textStyle ?? AppTextStyle.buttonLarge.copyWith(color: fg)).scaled(
-          context,
-        );
+        (widget.textStyle ?? AppTextStyle.buttonLarge.copyWith(color: fg))
+            .scaled(context);
 
     return SizedBox(
       height: effectiveHeight,
-      width: width != null ? context.rs(width!) : double.infinity,
+      width: widget.width != null ? context.rs(widget.width!) : double.infinity,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          gradient: isDisabled ? null : gradient,
+          gradient: isDisabled ? null : widget.gradient,
           color: isDisabled
-              ? bg.withValues(alpha: isLoading ? 0.85 : 0.5)
-              : (gradient == null ? bg : null),
+              ? bg.withValues(alpha: widget.isLoading ? 0.85 : 0.5)
+              : (widget.gradient == null
+                    ? (_hovering ? hoverBg : bg)
+                    : null),
           borderRadius: BorderRadius.circular(radius),
-          border: borderColor != null
-              ? Border.all(color: borderColor!, width: context.rs(1.5))
+          border: widget.borderColor != null
+              ? Border.all(
+                  color: widget.borderColor!,
+                  width: context.rs(1.5),
+                )
               : null,
-          boxShadow: isDisabled || gradient != null
+          boxShadow: isDisabled || widget.gradient != null
               ? null
               : [
                   BoxShadow(
@@ -92,32 +106,33 @@ class CustomButton extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: isDisabled ? null : onPressed,
+            onTap: isDisabled ? null : widget.onPressed,
+            onHover: (hovering) => setState(() => _hovering = hovering),
             borderRadius: BorderRadius.circular(radius),
             child: Container(
               padding: effectivePadding,
               alignment: Alignment.center,
-              child: isLoading
+              child: isDisabled
                   ? SpinKitThreeBounce(color: fg, size: context.rs(20))
                   : Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (prefixIcon != null) ...[
-                          prefixIcon!,
+                        if (widget.prefixIcon != null) ...[
+                          widget.prefixIcon!,
                           horizontalSpace(8),
                         ],
                         Flexible(
                           child: Text(
-                            text,
+                            widget.text,
                             style: effectiveTextStyle,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        if (suffixIcon != null) ...[
+                        if (widget.suffixIcon != null) ...[
                           horizontalSpace(8),
-                          suffixIcon!,
+                          widget.suffixIcon!,
                         ],
                       ],
                     ),

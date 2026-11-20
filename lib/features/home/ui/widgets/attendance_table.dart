@@ -190,25 +190,25 @@ class _StatusChip extends StatelessWidget {
     final (label, color, bg, border) = switch (status) {
       'Active' => (
         'نشط',
-        AppColors.statusActive,
+        AppColors.onStatusActive,
         AppColors.statusActiveBg,
         AppColors.statusActiveBorder,
       ),
       'EndingSoon' => (
         'ينتهي قريباً',
-        AppColors.statusExpiring,
+        AppColors.onStatusExpiring,
         AppColors.statusExpiringBg,
         AppColors.statusExpiringBorder,
       ),
       'Expired' => (
         'منتهي',
-        AppColors.statusExpired,
+        AppColors.onStatusExpired,
         AppColors.statusExpiredBg,
         AppColors.statusExpiredBorder,
       ),
       'Frozen' => (
         'مجمد',
-        AppColors.statusFrozen,
+        AppColors.onStatusFrozen,
         AppColors.statusFrozenBg,
         AppColors.statusFrozenBorder,
       ),

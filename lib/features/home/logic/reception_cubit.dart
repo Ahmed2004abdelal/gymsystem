@@ -221,6 +221,7 @@
 // }
 
 import 'package:bloc/bloc.dart';
+import 'package:gymsystem/core/helper/reverse_list.dart';
 import 'package:gymsystem/core/networking/api_result.dart';
 import 'package:gymsystem/features/home/data/repos/attendance_table_repo.dart';
 import 'package:gymsystem/features/home/data/repos/reception_repo.dart';
@@ -231,8 +232,30 @@ class ReceptionCubit extends Cubit<ReceptionState> {
   final AttendanceTableRepo _attendanceTableRepo;
   ReceptionCubit(this._receptionRepo, this._attendanceTableRepo)
     : super(const ReceptionState()) {
+    dailyVisitorsToday(); // سعر الحصة الفردية
     liveAttendance();
     firstFiveAttendances();
+  }
+
+  /// بيتنادى أول ما الـ app يفتح عشان نعرض سعر الحصة (feePerVisitor).
+  Future<void> dailyVisitorsToday() async {
+    emit(state.copyWith(dailyVisitorStatus: ReceptionStatus.loading));
+    final result = await _receptionRepo.dailyVisitorsToday();
+    if (isClosed) return;
+    result.when(
+      success: (data) => emit(
+        state.copyWith(
+          dailyVisitorStatus: ReceptionStatus.success,
+          dailyVisitorData: data,
+        ),
+      ),
+      failure: (error) => emit(
+        state.copyWith(
+          dailyVisitorStatus: ReceptionStatus.failure,
+          errorMessage: error.apiErrorModel.getAllErrorMessages(),
+        ),
+      ),
+    );
   }
 
   Future<void> memberCheckin(String memberCode) async {
@@ -339,6 +362,9 @@ class ReceptionCubit extends Cubit<ReceptionState> {
             ),
           ),
         );
+        // تسجيل الدخول نجح -> حدّث "داخل الصالة الآن" وسجل الدخول المباشر
+        liveAttendance(silent: true);
+        firstFiveAttendances(silent: true);
       },
       failure: (message) {
         emit(
@@ -351,8 +377,10 @@ class ReceptionCubit extends Cubit<ReceptionState> {
     );
   }
 
-  Future<void> liveAttendance() async {
-    emit(state.copyWith(liveAttendanceStatus: ReceptionStatus.loading));
+  Future<void> liveAttendance({bool silent = false}) async {
+    if (!silent) {
+      emit(state.copyWith(liveAttendanceStatus: ReceptionStatus.loading));
+    }
     final result = await _receptionRepo.liveAttendance();
     if (isClosed) return;
 
@@ -420,24 +448,43 @@ class ReceptionCubit extends Cubit<ReceptionState> {
     );
   }
 
-  Future<void> firstFiveAttendances() async {
-    emit(state.copyWith(firstFiveAttendancesStatus: ReceptionStatus.loading));
-    final result = await _attendanceTableRepo.getAttendanceTable();
-    if (isClosed) return;
-
-    result.when(
-      success: (data) => emit(
+  /// آخر 5 حضور (الأحدث أولاً).
+  Future<void> firstFiveAttendances({bool silent = false}) async {
+    if (!silent) {
+      emit(state.copyWith(firstFiveAttendancesStatus: ReceptionStatus.loading));
+    }
+    try {
+      final res = await fetchNewestFirst(
+        page: 1,
+        size: 5,
+        sortKey: (e) => e.checkInTime,
+        fetch: (p) async {
+          final r = await _attendanceTableRepo.getAttendanceTable(
+            pageNumber: p,
+            pageSize: 5,
+          );
+          return r.when(
+            success: (d) => (items: d.items, total: d.totalCount),
+            failure: (e) =>
+                throw PageFetchError(e.apiErrorModel.getAllErrorMessages()),
+          );
+        },
+      );
+      if (isClosed) return;
+      emit(
         state.copyWith(
           firstFiveAttendancesStatus: ReceptionStatus.success,
-          fiveAttendancesData: data.items,
+          fiveAttendancesData: res.items,
         ),
-      ),
-      failure: (error) => emit(
+      );
+    } on PageFetchError catch (e) {
+      if (isClosed) return;
+      emit(
         state.copyWith(
           firstFiveAttendancesStatus: ReceptionStatus.failure,
-          errorMessage: error.apiErrorModel.getAllErrorMessages(),
+          errorMessage: e.message,
         ),
-      ),
-    );
+      );
+    }
   }
 }
