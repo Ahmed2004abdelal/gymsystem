@@ -35,6 +35,11 @@ abstract class ApiService {
   @POST(ApiConstants.login)
   Future<LoginResponseModel> login(@Body() LoginRequestModel loginRequestModel);
 
+  @POST(ApiConstants.refreshToken)
+  Future<LoginResponseModel> refreshToken(
+    @Body() RefreshTokenModel refreshTokenModel,
+  );
+
   @GET('${ApiConstants.membersCheckinByCode}/{memberCode}')
   Future<MemberCheckintModel> membersCheckinByCode(
     @Path("memberCode") String memberCode,

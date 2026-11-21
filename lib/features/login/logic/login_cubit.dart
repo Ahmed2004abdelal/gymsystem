@@ -19,6 +19,10 @@ class LoginCubit extends Cubit<LoginState> {
     if (isClosed) return;
     response.when(
       success: (data) {
+        SharedPrefHelper.setSecuredString(
+          SharedPrefKeys.refreshToken,
+          data.refreshToken,
+        );
         SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, data.token);
         emit(const LoginState.success());
       },

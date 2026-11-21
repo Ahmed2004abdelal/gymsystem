@@ -1,6 +1,7 @@
 class ApiConstants {
   //auth
   static const String login = 'Auth/login';
+  static const String refreshToken = 'Auth/refresh-token';
 
   //members
   static const String memberShowCard = 'Members/by-code/';

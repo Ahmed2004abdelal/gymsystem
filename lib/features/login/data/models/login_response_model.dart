@@ -10,6 +10,7 @@ class LoginResponseModel {
   final String username;
   final String role;
   final String expiresOn;
+  final String refreshToken;
 
   LoginResponseModel({
     required this.isSuccess,
@@ -18,8 +19,21 @@ class LoginResponseModel {
     required this.username,
     required this.role,
     required this.expiresOn,
+    required this.refreshToken,
   });
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseModelFromJson(json);
   Map<String, dynamic> toJson() => _$LoginResponseModelToJson(this);
+}
+
+@JsonSerializable()
+class RefreshTokenModel {
+  final String refreshToken;
+
+  RefreshTokenModel({required this.refreshToken});
+
+  factory RefreshTokenModel.fromJson(Map<String, dynamic> json) =>
+      _$RefreshTokenModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RefreshTokenModelToJson(this);
 }

@@ -14,6 +14,7 @@ LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
       username: json['username'] as String,
       role: json['role'] as String,
       expiresOn: json['expiresOn'] as String,
+      refreshToken: json['refreshToken'] as String,
     );
 
 Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
@@ -24,4 +25,11 @@ Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
       'username': instance.username,
       'role': instance.role,
       'expiresOn': instance.expiresOn,
+      'refreshToken': instance.refreshToken,
     };
+
+RefreshTokenModel _$RefreshTokenModelFromJson(Map<String, dynamic> json) =>
+    RefreshTokenModel(refreshToken: json['refreshToken'] as String);
+
+Map<String, dynamic> _$RefreshTokenModelToJson(RefreshTokenModel instance) =>
+    <String, dynamic>{'refreshToken': instance.refreshToken};
