@@ -83,18 +83,23 @@ class _LoginCardState extends State<_LoginCard> {
     super.dispose();
   }
 
+  // void _submit() {
+  //   if (!_formKey.currentState!.validate()) return;
+  //   FocusScope.of(context).unfocus();
+  //   context
+  //       .read<LoginCubit>()
+  //       .login(_userCtrl.text, _passCtrl.text)
+  //       .then(
+  //         (val) => context.pushNamedAndRemoveUntil(
+  //           Routes.sideBarMenu,
+  //           predicate: (r) => false,
+  //         ),
+  //       );
+  // }
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
     FocusScope.of(context).unfocus();
-    context
-        .read<LoginCubit>()
-        .login(_userCtrl.text, _passCtrl.text)
-        .then(
-          (val) => context.pushNamedAndRemoveUntil(
-            Routes.sideBarMenu,
-            predicate: (r) => false,
-          ),
-        );
+    context.read<LoginCubit>().login(_userCtrl.text, _passCtrl.text);
   }
 
   @override
@@ -226,9 +231,10 @@ class _LoginCardState extends State<_LoginCard> {
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 state.whenOrNull(
-                  success: () {
-                    // TODO: navigate, e.g. context.go('/home');
-                  },
+                  success: () => context.pushNamedAndRemoveUntil(
+                    Routes.sideBarMenu,
+                    predicate: (r) => false,
+                  ),
                 );
               },
               builder: (context, state) {

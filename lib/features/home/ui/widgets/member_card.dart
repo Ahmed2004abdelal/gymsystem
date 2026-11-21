@@ -105,7 +105,7 @@ class _MemberPlaceholder extends StatelessWidget {
 
 // ───────────────────────────── Status ─────────────────────────────
 
-enum _SubStatus { active, expiring, expired, none }
+enum _SubStatus { active, expiring, expired, noSessions, none }
 
 /// الحالة بتتحسب من subscriptionStatus والباقة وعدد الأيام المتبقية.
 _SubStatus _statusOf(MemberShowCardModel m) {
@@ -115,6 +115,7 @@ _SubStatus _statusOf(MemberShowCardModel m) {
   }
   final days = m.remainingDays ?? 0;
   if (days <= 0) return _SubStatus.expired;
+  if (_sessionsExhausted(m)) return _SubStatus.noSessions;
   if (days <= 7) return _SubStatus.expiring;
   return _SubStatus.active;
 }
@@ -156,6 +157,18 @@ _StatusStyle _styleOf(_SubStatus s) {
         passTitle: 'تصريح دخول فوري مسموح به',
         passMessage: 'الاشتراك ساري ويمكن للعضو دخول الصالة',
         passTag: 'PASS:\nVALID',
+      );
+    case _SubStatus.noSessions:
+      return _StatusStyle(
+        color: AppColors.statusExpired,
+        bg: AppColors.statusExpired.withValues(alpha: 0.12),
+        border: AppColors.statusExpired.withValues(alpha: 0.35),
+        chipIcon: Icons.block_rounded,
+        passIcon: Icons.no_meeting_room_rounded,
+        chipText: 'نفدت الحصص',
+        passTitle: 'الدخول غير مسموح',
+        passMessage: 'تم نفاد الحصص المتاحة، يجب تجديد الاشتراك',
+        passTag: 'PASS:\nDENIED',
       );
     case _SubStatus.expiring:
       return const _StatusStyle(
